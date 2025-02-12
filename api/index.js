@@ -1,9 +1,28 @@
 import express from "express";
-import { promises as fs } from "fs";
 import crypto from "crypto";
 
 const app = express();
 
+// Lista de palabras directamente en el código
+const palabras = [
+  "casa",
+  "perro",
+  "gato",
+  "nube",
+  "flor",
+  "tren",
+  "dardo",
+  "luzco",
+  "mango",
+  "riego",
+  "truco",
+  "vacas",
+  "zorro",
+  "hondo",
+  "nacer",
+];
+
+// Función para obtener un índice basado en la fecha actual
 const getDailyIndex = (length) => {
   const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
   const hash = crypto.createHash("md5").update(today).digest("hex");
@@ -13,38 +32,30 @@ const getDailyIndex = (length) => {
 
 app.get("/", (req, res) => {
   res.json({
-    message: "Hello World Welcome to Wordle API by Pablo Martin Lopez",
+    message: "Hello World Welcome to Wordle API",
     status: "ok 👌",
     code: 200,
   });
 });
 
-app.get("/wordle", async (req, res) => {
-  try {
-    const data = await fs.readFile("./palabras.json", "utf8");
-    const palabras = JSON.parse(data).palabras;
-
-    if (!palabras || palabras.length === 0) {
-      throw new Error("No hay palabras en la lista.");
-    }
-
-    const index = getDailyIndex(palabras.length);
-    const palabra = palabras[index];
-
-    res.json({
-      message: "Palabra del día",
-      status: "ok ✅",
-      code: 200,
-      data: { palabra },
-    });
-  } catch (err) {
-    console.error("Error al leer el archivo:", err);
-    res.status(500).json({
-      message: "Error interno del servidor",
+app.get("/wordle", (req, res) => {
+  if (!palabras || palabras.length === 0) {
+    return res.status(500).json({
+      message: "No hay palabras en la lista.",
       status: "error ❌",
       code: 500,
     });
   }
+
+  const index = getDailyIndex(palabras.length);
+  const palabra = palabras[index];
+
+  res.json({
+    message: "Palabra del día",
+    status: "ok ✅",
+    code: 200,
+    data: { palabra },
+  });
 });
 
 // Middleware 404
@@ -56,5 +67,12 @@ app.use((req, res) => {
   });
 });
 
-// Exportar para Vercel
+// Iniciamos el servidor en el puerto 3000
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+// Exportamos la app en lugar de usar app.listen()
 export default app;
