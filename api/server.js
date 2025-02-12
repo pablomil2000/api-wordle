@@ -19,7 +19,7 @@ app.get("./", (req, res) => {
   });
 });
 
-app.get("./api/wordle", async (req, res) => {
+app.get("./wordle", async (req, res) => {
   try {
     const data = await fs.readFile("./palabras.json", "utf8");
     const palabras = JSON.parse(data).palabras;
