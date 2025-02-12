@@ -47,7 +47,7 @@ app.get("/api/wordle", async (req, res) => {
   }
 });
 
-// 404
+// Middleware 404
 app.use((req, res) => {
   res.status(404).json({
     message: "Page not found",
@@ -56,6 +56,5 @@ app.use((req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000");
-});
+// Exportar para Vercel
+export default app;

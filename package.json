@@ -2,15 +2,15 @@
   "name": "api-wordle",
   "version": "1.0.0",
   "description": "Api Wordle",
-  "main": "server.js",
+  "main": "api/index.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Pablo Martín Lóipez",
+  "author": "Pablo Martín López",
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.2"
