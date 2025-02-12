@@ -1,7 +1,10 @@
 import express from "express";
 import crypto from "crypto";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors());
 
 // Lista de palabras directamente en el código
 const palabras = [
@@ -69,10 +72,10 @@ app.use((req, res) => {
 
 // Iniciamos el servidor en el puerto 3000
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on http://localhost:${PORT}`);
+// });
 
 // Exportamos la app en lugar de usar app.listen()
 export default app;
