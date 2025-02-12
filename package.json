@@ -2,11 +2,11 @@
   "name": "api-wordle",
   "version": "1.0.0",
   "description": "Api Wordle",
-  "main": "api/server.js",
+  "main": "api/index.js",
   "type": "module",
   "scripts": {
-    "start": "node api/server.js",
-    "dev": "nodemon api/server.js",
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
