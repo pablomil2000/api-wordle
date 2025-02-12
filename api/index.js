@@ -11,7 +11,7 @@ const getDailyIndex = (length) => {
   return number % length;
 };
 
-app.get("./", (req, res) => {
+app.get("/", (req, res) => {
   res.json({
     message: "Hello World Welcome to Wordle API by Pablo Martin Lopez",
     status: "ok 👌",
@@ -19,7 +19,7 @@ app.get("./", (req, res) => {
   });
 });
 
-app.get("./wordle", async (req, res) => {
+app.get("/wordle", async (req, res) => {
   try {
     const data = await fs.readFile("./palabras.json", "utf8");
     const palabras = JSON.parse(data).palabras;
